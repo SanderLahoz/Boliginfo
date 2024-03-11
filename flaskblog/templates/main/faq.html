@@ -1,0 +1,113 @@
+{% extends "layout.html" %}
+{% block content %}
+
+    <h2 class="article-title">FAQ's</h2>
+    <div class="article-metadata"></div>
+    <br>
+
+    <details>
+      <summary>
+        <div class="content-section">
+        <h5 class="article-title"><b>Hvad gør jeres hjemmeside anderledes end andre ejendomsplatforme?</b></h5>
+        </div>
+        <span class="icon"></span>
+      </summary>
+      <p>
+        Vi adskiller os ved at tilbyde en centraliseret platform, der samler alle boligdata i Danmark på ét sted. Vores fokus er på brugervenlighed og levering af dybdegående værktøjer til investeringsanalyse.
+      </p>
+    </details>
+    <details>
+      <summary>
+    <div class="content-section">
+        <h5 class="article-title"><b>Hvordan får jeg adgang til boligdata?</b></h5>
+    </div>
+        <span class="icon"></span>
+      </summary>
+      <p>
+        Det er enkelt! Du kan søge, filtrere og sortere boliger direkte på hjemmesiden (Analyze -> hent bolig data). Derudover tilbyder vi en downloadfunktion, så du kan gemme dine søgninger og data i Excel-filer.
+      </p>
+    </details>
+    <details>
+      <summary>
+        <div class="content-section">
+        <h5 class="article-title"><b>Hvordan fungerer nutidsværdiberegneren?</b></h5>
+        </div>
+        <span class="icon"></span>
+      </summary>
+      <p>
+        Vores nutidsværdiberegner er designet til at beregne nutidsværdien af en potentiel investering. Det gør den ved at tilbagediskontere nettobetalingsstrømmen med en given tilbagediskonteringsfaktor. tilbagediskonteringsfaktoren bestemmes af et vægtet gennemsnit af fremmedkapitalomkostningerne og den forventet egenkapitalforretning. 
+      </p>
+    </details>
+       <details>
+      <summary>
+        <div class="content-section">
+        <h5 class="article-title"><b>Hvordan kan jeg stole på de oplysninger, I præsenterer?</b></h5>
+        </div>
+        <span class="icon"></span>
+      </summary>
+      <p>
+        Vi trækker data fra pålidelige og anerkendte kilder for at sikre nøjagtighed. Derudover opdateres vores database regelmæssigt, så du altid har de seneste oplysninger.
+      </p>
+    </details>
+       <details>
+      <summary>
+        <div class="content-section">
+        <h5 class="article-title"><b>Er der nogen omkostninger forbundet med brugen af hjemmesiden?</b></h5>
+        </div>
+        <span class="icon"></span>
+      </summary>
+      <p>
+        Vi tilbyder premiumfunktioner og abonnementer med ekstra fordele for dem, der ønsker adgang til værktøjerne og analysemuligheder. Du er velkommen til at contakte os angående priserne på vores produkter eller affiliate aftaler. 
+      </p>
+    </details>
+    <details>
+      <summary>
+        <div class="content-section">
+        <h5 class="article-title"><b>Hvordan kan jeg downloade boligdata til Excel?</b></h5>
+        </div>
+        <span class="icon"></span>
+      </summary>
+      <p>
+        Efter at have udført din søgning kan du vælge "Download" og gemme resultatet som en Excel-fil på din enhed. Dette giver dig mulighed for at analysere data offline eller dele det med andre.
+      </p>
+    </details>
+    <details>
+      <summary>
+        <div class="content-section">
+        <h5 class="article-title"><b>Hvordan kan jeg komme i kontakt med jeres supportteam?</b></h5>
+        </div>
+        <span class="icon"></span>
+      </summary>
+      <p>
+        Du kan kontakte vores supportteam via kontaktformularen på hjemmesiden eller sende os en e-mail på sanderlahozwork@gmail.com. Vi bestræber os på at besvare alle henvendelser så hurtigt som muligt.
+      </p>
+    </details>
+       <details>
+      <summary>
+        <div class="content-section">
+        <h5 class="article-title"><b>Hvordan beskytter I mine personlige oplysninger?</b></h5>
+        </div>
+        <span class="icon"></span>
+      </summary>
+      <p>
+        Vi tager databeskyttelse alvorligt. Vores hjemmeside bruger sikre forbindelser og overholder gældende databeskyttelsesregler. Læs vores <a href="{{ url_for('policies.privacy_policy') }}">privatlivspolitik</a> for yderligere oplysninger.
+      </p>
+    </details>
+    <details>
+      <summary>
+        <div class="content-section">
+        <h5 class="article-title"><b>Hvordan opdateres boligdata?</b></h5>
+        </div>
+        <span class="icon"></span>
+      </summary>
+      <p>
+        Vores boligdata opdateres løbende baseret på de seneste oplysninger fra ejendomsmæglere, offentlige registre og andre pålidelige kilder. Du kan være sikker på at modtage aktuelle og nøjagtige oplysninger.
+      </p>
+    </details>
+
+    </div>
+        <div class="col-md-4">
+          <img class="d-none d-sm-block" src="{{ url_for('static', filename='img/Faq.png') }}">
+        </div>
+    </div>
+{% endblock content %}

@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+{% block content %}
+	<div class="content-section-loging mt-4">
+		 <h2 class="article-title">Hmm, den side findes ikke (404)</h2>
+		 <p>Forsøg venligst en anden URL, eller vend tilbage via navigationsbaren</p>
+	</div>
+	</div>
+	    <div class="col-md-4">
+	      <img class="d-none d-sm-block" src="{{ url_for('static', filename='img/Error.png') }}">
+	    </div>
+	</div>
+{% endblock content %}

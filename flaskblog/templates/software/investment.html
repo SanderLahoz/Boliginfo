@@ -1,0 +1,74 @@
+{% extends "layout.html" %}
+{% block content %}
+
+
+    {% if house %}
+
+
+
+    <div class="card mb-4 box-shadow mt-4" style="background-color: #0e1111; box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;">
+                  <div class="card-header" style="background-color: lightblue;">
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <h4 class="my-0 font-weight-normal montseret-textfont">INFO OM BOLIG</h4>
+                            </div>
+                        </div>
+                    </div>
+
+                  </div>
+                  <div class="card-body">
+                    <h2 class="card-title pricing-card-title mb-4" style="color: white; text-align: center;">Bolig <small class="text-muted" style="color: white;">{{ house.address }}</small></h2></small></h2>
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-4">
+                                <ul class="list-unstyled mt-3 mb-4">
+                                  <li>Pris: <strong>{{ "{:,}".format(house.price) }} Kr. </strong></li>
+                                  <li>Kvadratmeter: <strong>{{ house.square_footages }} m²</strong></li>
+                                  <li>Ejerudgift: <strong>{{ "{:,}".format(house.expenses) }} Kr.</strong></li>
+                                </ul>
+                            </div>
+
+                            <div class="col-4">
+                                <ul class="list-unstyled mt-3 mb-4">
+                                  <li>Dage til salg: <strong>{{ house.for_sale_days }} Dage</strong></li>
+                                  <li>Værelser: <strong>{{ house.rooms }} Værelser</strong></li>
+                                  <li>Byggeår: <strong>{{ house.construction_year }}</strong></li>
+                                </ul>
+                            </div>
+
+                             <div class="col-4">
+                                <ul class="list-unstyled mt-3 mb-4">
+                                  <li>Pris pr. Kvadratmeter: <strong>{{ "{:,.2f}".format((house.price / house.square_footages)) }} Kr / m²</strong></li>
+                                  <li>Grund: <strong>{{ house.land }} m²</strong></li>
+                                  <li>Link: <strong><a href="{{ house.url }}" target="_blank">Se bolig</a></strong></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+
+
+
+
+    </div>
+    </div>
+    <div class="card-body">
+    
+
+
+  {% else %}
+
+  <h1>No data</h1>
+
+  {% endif %}
+    
+    
+
+{% endblock content %}

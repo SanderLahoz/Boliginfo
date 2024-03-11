@@ -1,0 +1,199 @@
+{% extends "layout.html" %}
+{% block content %}
+
+ 
+<div class="container mt-4 shadow-black-background calculatorheader" style="background-color: #0d6efd;">
+
+    
+        <h2 class="montserrat-textfont" style="color: white;">Beregn nutidsværdien af din investering! 
+           
+        </h2>
+
+</div>
+
+
+
+<div class="container" style=" background-color: black; padding: 20px">
+
+	<form method="POST" action="">
+	{{ form.hidden_tag() }}
+		<fieldset class="form-group"> 
+
+
+			<div class="row">
+				<div class="col-6">
+
+					<div class="form-group">
+						{{ form.investment_sum.label(class="form-control-label") }}
+                        {% if form.investment_sum.errors %}
+                            {{ form.investment_sum(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.investment_sum.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.investment_sum(class="form-control form-control-lg") }}
+                        {% endif %}
+					</div>
+					
+				</div>
+				<div class="col-6">
+
+					<div class="form-group">
+						{{ form.scrap_value.label(class="form-control-label") }}
+                        {% if form.scrap_value.errors %}
+                            {{ form.scrap_value(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.scrap_value.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.scrap_value(class="form-control form-control-lg") }}
+                        {% endif %}
+					</div>
+					
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-6">
+
+					<div class="form-group">
+						{{ form.payment.label(class="form-control-label") }}
+                        {% if form.payment.errors %}
+                            {{ form.payment(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.payment.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.payment(class="form-control form-control-lg") }}
+                        {% endif %}
+					</div>
+					
+				</div>
+				<div class="col-6">
+
+					<div class="form-group">
+						{{ form.number_of_payments.label(class="form-control-label") }}
+                        {% if form.number_of_payments.errors %}
+                            {{ form.number_of_payments(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.number_of_payments.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.number_of_payments(class="form-control form-control-lg") }}
+                        {% endif %}
+					</div>
+					
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-6">
+
+					<div class="form-group">
+						{{ form.interest.label(class="form-control-label") }}
+                        {% if form.interest.errors %}
+                            {{ form.interest(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.interest.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.interest(class="form-control form-control-lg") }}
+                        {% endif %}
+					</div>
+					
+				</div>
+				<div class="col-6">
+
+                    <div class="row">
+                        
+                         <div class="col-6">
+                                
+                            <div class="form-group">
+                                {{ form.pay_increase.label(class="form-control-label") }}
+                                {% if form.pay_increase.errors %}
+                                    {{ form.pay_increase(class="form-control form-control-lg is-invalid") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.pay_increase.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.pay_increase(class="form-control form-control-lg") }}
+                                {% endif %}
+                            </div>
+
+                        </div>
+                        <div class="col-6">
+                            
+                            <div class="form-group">
+                                {{ form.step.label(class="form-control-label") }}
+                                {% if form.step.errors %}
+                                    {{ form.step(class="form-control form-control-lg is-invalid") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.step.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.step(class="form-control form-control-lg") }}
+                                {% endif %}
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+
+					
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-12">
+                    <div class="form-group" style="margin-top: 25px;">
+                        {{ form.submit(class="btn btn-outline-primary btn-lg btn-block") }}
+                    </div>
+				</div>
+			</div>
+
+		</fieldset>
+	</form>
+
+	{% if value %}
+
+	<h1 class="montserrat-textfont" style="color: white; text-align: center">Nutidsværdi: {{ "{:,}".format(value) }} Kr.</h1>
+
+	{% endif %}
+
+</div>
+
+
+    </div>
+        <div class="col-md-4 mt-4 d-none d-sm-block shadow-black-background" style="color: white; border-style: solid black;">
+
+
+            <h3 class="mb-4 mt-4 montserrat-textfont" style="text-align: center; color: white;">Investeringskalkule</h3>
+
+            <div style="align-items: center; margin-bottom: 15%; margin-top: 10%;">
+                <img class="d-none d-sm-block" src="{{ url_for('static', filename='img/CalculatorWhite.png') }}">    
+            </div>
+
+               <ul class="list-unstyled mt-4 montserrat-textfont" style="font-size: 20px;">
+                  <li>NB : <span style="text-align: right;">Nettobetalingsstrøm</span></li>
+                  <li>NB(0) : Investeringssum</li>
+                  <li>N : Terminer</li> 
+                </ul>
+
+
+        </div>
+    </div>
+{% endblock content %}

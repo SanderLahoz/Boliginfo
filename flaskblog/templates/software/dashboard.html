@@ -1,0 +1,187 @@
+{% extends "layout.html" %}
+{% block content %}
+    <head>
+    </head>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="filler mt-2 mb-4" style="color: rgba(0,0,0,0);">
+                -
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2">
+                <div>
+                <form method="POST" action="">
+                    {{ form.hidden_tag() }}
+                    <fieldset class="form-group"> 
+                        <div class="form-group">
+                            {{ form.postnummer.label(class="form-control-label") }}
+                            {% if form.postnummer.errors %}
+                                {{ form.postnummer(class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.postnummer.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.postnummer(class="form-control form-control-lg") }}
+                            {% endif %}
+                        </div>
+                        <div class="form-group">
+                            {{ form.afkastkrav.label(class="form-control-label") }}<abbr title="Afkastkrav er det krav om afkast, investor forlanger af sin investering. Afkastkravet kan opgøres til summen af den risikofri rente og en risikopræmie. Risikopræmien bestemmes af investor, men er typisk mindst 2-4%."><span class="material-symbols-outlined ml-1" style="font-size: 15px;">info</span></abbr>
+                            {% if form.afkastkrav.errors %}
+                                {{ form.afkastkrav(class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.afkastkrav.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.afkastkrav(class="form-control form-control-lg") }}
+                            {% endif %}
+                        </div>
+                        <div class="form-group">
+                            {{ form.leje.label(class="form-control-label") }}<abbr title="Hvad forventes en bolig i ovenstående postnummer, at kunne lejes ud til pr. kvadratmeter"><span class="material-symbols-outlined ml-1" style="font-size: 15px;">info</span></abbr>
+                            {% if form.leje.errors %}
+                                {{ form.leje(class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.leje.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.leje(class="form-control form-control-lg") }}
+                            {% endif %}
+                        </div>
+                        <div class="form-group" style="margin-top: 25px;">
+                            {{ form.submit(class="btn btn-outline-info btn-block") }}
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+            </div>
+            <div class="col-10">
+                {% if data %}
+                <div class="container">
+                    <div class="row">
+                        <div class="col-4"></div>
+                        <div class="col-4"></div>
+                        <div class="col-3 shadow-black-background" >
+                            Download Excel
+                        </div>
+                        <div class="col-1 shadow-black-background">
+                            <a href="{{ url_for('software.download_file', form=form.postnummer.data) }}">
+                                <span class="material-symbols-outlined md-light">print</span>
+                            </a>            
+                        </div>
+                    </div>
+                </div>
+
+                {% set count = [] %}
+                <div class="table-responsive table-wrapper-scroll-y my-custom-scrollbar" style="width: 100%;">
+                    <table class="table table-dark table-hover tableFixHead sortable">
+                        <thead class="thead-dark">
+                            <tr scope="row">
+                                <th scope="col" class="sorttable_nosort">Adresse</th>
+                                <th scope="col">Pris</th>
+                                <th scope="col">Kvadratmeter</th>
+                                <th scope="col">Ejerudgift</th>
+                                <th scope="col">Værelser</th>
+                                <th scope="col">Byggeår</th>
+                            </tr>
+                        </thead>
+                        {% if afkastkrav %}
+                            {% for item in data %}
+                                {% if calc_success(afkastkrav, leje, item) %}
+                                 <tr class="show-clickable table-success" scope="row" onclick="window.location='{{ url_for('software.investment', house=item.id) }}'">
+                                    <td>{{ item.address.split(form.postnummer.data)[0] }}</td>
+                                    <td>{{ "{:,}".format(item.price) }}</td>
+                                    <td>{{ item.square_footages }}</td>
+                                    <td>{{ "{:,}".format(item.expenses) }}</td>
+                                    <td>{{ item.rooms }}</td>
+                                    <td>{{ item.construction_year }}</td>
+                                </tr>
+                                {% set __ = count.append(1) %}
+                                {% else %}
+                                 <tr class="show-clickable table-danger" scope="row" onclick="window.location='{{ url_for('software.investment', house=item.id) }}'">
+                                    <td>{{ item.address.split(form.postnummer.data)[0] }}</td>
+                                    <td>{{ "{:,}".format(item.price) }}</td>
+                                    <td>{{ item.square_footages }}</td>
+                                    <td>{{ "{:,}".format(item.expenses) }}</td>
+                                    <td>{{ item.rooms }}</td>
+                                    <td>{{ item.construction_year }}</td>
+                                </tr>
+                                {% endif %}
+                            {% endfor %}
+                        {% else %}
+                            {% for item in data %}
+                             <tr class="show-clickable" scope="row" onclick="window.location='{{ url_for('software.investment', house=item.id) }}'">
+                                <td>{{ item.address.split(form.postnummer.data)[0] }}</td>
+                                <td>{{ "{:,}".format(item.price) }}</td>
+                                <td>{{ item.square_footages }}</td>
+                                <td>{{ "{:,}".format(item.expenses) }}</td>
+                                <td>{{ item.rooms }}</td>
+                                <td>{{ item.construction_year }}</td>
+                            </tr>
+                            {% endfor %}
+                        {% endif %}
+                    </table>
+                </div>
+
+                <div class="card mb-4 box-shadow mt-4" style="background-color: #0e1111; box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;">
+                  <div class="card-header" style="background-color: lightblue;">
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-2">
+                                <h4 class="my-0 font-weight-normal">Statistik</h4>
+                            </div>
+
+                            <div class="col-5">
+                                <div><h4 class="my-0 font-weight-normal" style="text-align: center;">Boliger i alt: {{ data|length }}</h4></div>
+                            </div>
+                            <div class="col-5">
+                                <div><h4 class="my-0 font-weight-normal" style="text-align: center;">Succesfulde Boliger: {{ count|length }}</h4></div>
+                            </div>
+                        </div>
+                    </div>
+
+                  </div>
+                  <div class="card-body">
+                    <h2 class="card-title pricing-card-title" style="color: white;">Postnummer <small class="text-muted" style="color: white;">{{ form.postnummer.data }}</small></h2>
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-6">
+                                <ul class="list-unstyled mt-3 mb-4">
+                                  <li>Gennemsnits pris: <strong>{{ "{:,.2f}".format(statistics[0]) }} Kr.</strong></li>
+                                  <li>Gennemsnits pris per kvadratmeter: <strong>{{ "{:,.2f}".format(statistics[1]) }} Kr. pr. m²</strong></li>
+                                  <li>Gennemsnitslig ejerudgift: <strong>{{ "{:,.2f}".format(statistics[2]) }} Kr.</strong></li>
+                                </ul>
+                            </div>
+
+                            <div class="col-6">
+                                <ul class="list-unstyled mt-3 mb-4">
+                                  <li>Gennemsnits dage til salg: <strong>{{ statistics[3] }} Dage</strong></li>
+                                  <li>Gennemsnits antal værelser: <strong>{{ statistics[4] }} Værelser</strong></li>
+                                  <li>Gennemsnits størrelse: <strong>{{ statistics[5] }} m²</strong></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            {% else %}
+
+            <iframe src='https://my.spline.design/aibrain-ba3bc575f45a1ddc4f22b963549da8a4/' frameborder='0' width='100%' height='100%'></iframe>
+
+
+            {% endif %}
+            </div>
+        </div>
+    </div>
+</div>    
+{% endblock content %}
