@@ -1,0 +1,48 @@
+html {
+    font-size: 14px;
+  }
+  @media (min-width: 768px) {
+    html {
+      font-size: 16px;
+    }
+  }
+  
+  #freehover {
+      color: lightblue;
+  }
+  
+  #freehover:hover {
+      background-color: lightblue;
+      color: black;
+  }
+  
+  .container {
+    max-width: 960px;
+  }
+  
+  .card-title {
+      color: white;
+  }
+  
+  .card-header {
+      background-color: #007bff;
+      /*background-color: #305974;*/
+  }
+  
+  .pricing-header {
+    max-width: 700px;
+    color: white;
+  }
+  
+  .card-deck .card {
+    min-width: 220px;
+    color: lightgrey;
+    background-color: black;
+  }
+  
+  .border-top { border-top: 1px solid #e5e5e5; }
+  .border-bottom { border-bottom: 1px solid #e5e5e5; }
+  
+  .box-shadow { 
+      box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  }
