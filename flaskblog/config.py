@@ -1,10 +1,15 @@
 from dotenv import load_dotenv
+import os.path
 import os
+
 
 load_dotenv()
 
 class Config:
 	SECRET_KEY = os.getenv("SOP_SECRET_KEY")
+
+	BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
 	SQLALCHEMY_DATABASE_URI = os.getenv("SOP_SQL_URI")
 	MAIL_SERVER = "smtp.gmail.com"
 	MAIL_PORT = 587
